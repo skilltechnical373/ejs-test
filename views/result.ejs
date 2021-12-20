@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="card">
+        <% for (let result of results) { %>
+        <div class="card-body">
+          <h4 class="card-title">Name: <%= result.name %></h4>
+          <br />
+          <h4 class="card-title">Email: <%= result.name %></h4>
+          <br />
+          <h4 class="card-title">Phone: <%= result.phone %></h4>
+          <br />
+          <h4 class="card-title">Payment: <%= result.payment %></h4>
+          <input
+            type="hidden"
+            id="resultId"
+            value="<%= result.id %>"
+            name="resultId"
+          />
+          <br />
+          <div class="d-flex justify-content-center align-items-center">
+            <button onclick="handleEdit()" class="btn btn-success">Edit</button>
+            <button class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+        <% } %>
+      </div>
+    </div>
+    <script>
+      function handleEdit() {
+        const resultId = document.getElementById('resultId');
+        if (resultId) {
+          debugger;
+          fetch('/delete', {
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            method: 'POST',
+            // body: JSON.stringify({ id: resultId.value }),
+          })
+            .then(function (res) {
+              console.log(res);
+            })
+            .catch(function (res) {
+              console.log(res);
+            });
+        }
+      }
+    </script>
+  </body>
+</html>
